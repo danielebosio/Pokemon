@@ -1,0 +1,120 @@
+/* Stili generali per la pagina */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f2f2f2;
+}
+
+/* Contenitore principale a tutta pagina */
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+}
+
+/* Barra superiore fissata in alto */
+.header {
+    background-color: #ff3d3d;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+/* Contenitore logo e titolo */
+.logo-title {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Spazio tra il logo e il titolo */
+}
+
+.logo-title img {
+    height: 30px;
+}
+
+.logo-title .title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* Icone della barra */
+.header .icons {
+    display: flex;
+    gap: 15px;
+}
+
+.header .icons img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Testo principale centrato */
+.main-text {
+    font-size: 8em;
+    font-family: 'Pokemon Solid', sans-serif;
+    color: rgb(206, 83, 83);                                           
+    margin: 100px 0 30px 0; /* Spazio per non coprire il testo sotto la barra */
+}
+
+.search-bar {
+    width: 300px;
+    padding: 10px;
+    font-size: 1em;
+    border: 2px solid #ffde59;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Bottone di ricerca */
+.search-button {
+    background-color: #ffde59;
+    color: black;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #ffcd29;
+}
+
+.catch-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.catch-button:hover {
+    background-color: #45a049;
+}
+
+
