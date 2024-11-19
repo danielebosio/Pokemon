@@ -1028,29 +1028,40 @@ const pokelist = [
     "Mime-Jr"
 ]
 
-async function fetchData(){
+async function fetchData() {
+    try {
+        // Calcolo dell'indice casuale
+        const l = pokelist.length;
+        const i = Math.floor(Math.random() * l);
 
-    let l = pokelist.length();
+        // Ottenere il nome del Pokémon
+        const nomePokemon = pokelist[i].toLowerCase();
 
-    let i = Math.floor(Math.random() * l + 1);
+        // Effettuare la richiesta API
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${nomePokemon}`);
+        
+        if (!response.ok) {
+            throw new Error("Impossibile trovare il Pokémon");
+        }
 
-     try{
-    const nomepokemon = pokelist[i].toLowerCase();
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${nomepokemon}`);
-    
-    if(!response.ok){
-        throw new Error ("Impossibile trovare il pokemon");
-    }
+        const data = await response.json();
+        const pkSprite = data.sprites.front_default;
 
-    const data = await response.json();
-    const pkSprite = data.sprites.front_default;
-    const imgElement = document.getElementById("pokeSprite");
+        // Aggiornare l'immagine del Pokémon
+        const imgElement = document.getElementById("pokeSprite");
+        imgElement.src = pkSprite;
+        imgElement.style.display = "block";
 
-    imgElement.src = pkSprite;
-    imgElement.style.display= "block";
-    }
-    catch(error){
+        // Mostrare il nome del Pokémon
+        const output = document.getElementById("output");
+        output.textContent = `Hai trovato: ${data.name}`;
+        output.style.color = "black";
+    } catch (error) {
         console.error(error);
-    }
 
+        // Mostrare l'errore all'utente
+        const output = document.getElementById("output");
+        output.textContent = error.message;
+        output.style.color = "red";
+    }
 }
