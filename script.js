@@ -1028,16 +1028,16 @@ const pokelist = [
     "Mime-Jr"
 ]
 
-
 async function fetchData() {
     try {
-        // Indice Casuale
+        // Calcolo dell'indice casuale
         const l = pokelist.length;
         const i = Math.floor(Math.random() * l);
 
-        // Nome del Pokemon
+        // Ottenere il nome del Pokémon
         const nomePokemon = pokelist[i].toLowerCase();
 
+        // Effettuare la richiesta API
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${nomePokemon}`);
         
         if (!response.ok) {
@@ -1047,34 +1047,19 @@ async function fetchData() {
         const data = await response.json();
         const pkSprite = data.sprites.front_default;
 
-        //Sprite
+        // Aggiornare l'immagine del Pokémon
         const imgElement = document.getElementById("pokeSprite");
         imgElement.src = pkSprite;
         imgElement.style.display = "block";
 
-        // Dati del pokemon
+        // Mostrare il nome del Pokémon
         const output = document.getElementById("output");
         output.textContent = `Hai trovato: ${data.name}`;
-        output.style.color = "black";
-
-        const tipi = document.getElementById("tipi");
-        const types = data.types.map(typeInfo => typeInfo.type.name).join(', ');
-        tipi.textContent = `Tipo: ${types.charAt(0).toUpperCase() + types.slice(1)}`;
-
-        const statsElements = document.querySelectorAll('.stats > div');
-                if (statsElements.length === 6) {
-                    statsElements[0].textContent = `HP: ${hp}`;
-                    statsElements[1].textContent = `ATK: ${attack}`;
-                    statsElements[2].textContent = `DEF: ${defense}`;
-                    statsElements[3].textContent = `SpA: ${specialAttack}`;
-                    statsElements[4].textContent = `SpD: ${specialDefense}`;
-                    statsElements[5].textContent = `SPD: ${speed}`;
-                }
-    
+        output.style.color = "green";
     } catch (error) {
         console.error(error);
 
-        // Gestione errori
+        // Mostrare l'errore all'utente
         const output = document.getElementById("output");
         output.textContent = error.message;
         output.style.color = "red";

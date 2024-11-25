@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -17,26 +16,27 @@
                 <div class="title">Finder</div>
             </div>
             <div class="icons">
+                <img src="img/casa.png" alt="Home">
                 <img src="img/lista.png" alt="List">
                 <img src="img/user.png" alt="User">
             </div>
         </div>
 
         <!-- Main content -->
-        <div class="main-text">Genera un Pokémon casuale</div>
+        <div class="main-text">Trova un Pokémon</div>
 
+        <!-- Barra di ricerca -->
+        <input type="text" id="pknome" class="search-bar" placeholder="Inserisci il nome del Pokémon">
+        
         <!-- Pulsanti di ricerca e cattura -->
-        <button class="search-button" onclick="fetchData()">Genera</button>
+        <button class="search-button" onclick="fetchData()">Cerca</button>
         <button class="catch-button">Catch</button><br>
 
-        <!-- Sprite del Pokémon e risultato -->
-        <img src="" alt="Sprite del Pokémon" id="pokeSprite" style="display:none;">
+        <!-- Sprite del Pokemon e risultato -->
+        <img src="" alt="Sprite del Pokemon" id="pokeSprite">
         <div id="output"></div>
-        <div id="tipi"></div>
-        <div id="stats"></div>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
