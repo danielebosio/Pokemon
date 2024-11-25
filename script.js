@@ -983,17 +983,17 @@ const pokelist = [
     "Dudunsparce",
     "Kingambit",
     "GreatTusk",
-    "ScreamTail",
-    "BruteBonnet",
-    "FlutterMane",
+    "Scream-Tail",
+    "Brute-Bonnet",
+    "Flutter-Mane",
     "SlitherWing",
-    "SandyShocks",
-    "IronTreads",
-    "IronBundle",
-    "IronHands",
-    "IronJugulis",
-    "IronMoth",
-    "IronThorns",
+    "Sandy-Shocks",
+    "Iron-Treads",
+    "Iron-Bundle",
+    "Iron-Hands",
+    "Iron-Jugulis",
+    "Iron-Moth",
+    "Iron-Thorns",
     "Frigibax",
     "Arctibax",
     "Baxcalibur",
@@ -1018,50 +1018,193 @@ const pokelist = [
     "Ogerpon",
     "Archaludon",
     "Hydrapple",
-    "GougingFire",
-    "RagingBolt",
-    "IronBoulder",
-    "IronCrown",
+    "Gouging-Fire",
+    "Raging-Bolt",
+    "Iron-Boulder",
+    "Iron-Crown",
     "Terapagos",
     "Pecharunt",
     "Mr-Mime",
     "Mime-Jr"
 ]
+// Colori associati ai tipi Pokémon
+const typeColors = {
+    normal: '#A8A878',
+    fire: '#F08030',
+    water: '#6890F0',
+    grass: '#78C850',
+    electric: '#F8D030',
+    ice: '#98D8D8',
+    fighting: '#C03028',
+    poison: '#A040A0',
+    ground: '#E0C068',
+    flying: '#A890F0',
+    psychic: '#F85888',
+    bug: '#A8B820',
+    rock: '#B8A038',
+    ghost: '#705898',
+    dragon: '#7038F8',
+    dark: '#705848',
+    steel: '#B8B8D0',
+    fairy: '#EE99AC',
+};
+
+function displayPokemonStats(stats, types) {
+    const statsContainer = document.getElementById('pokemon-stats');
+    statsContainer.innerHTML = ''; // Svuota le statistiche precedenti
+
+    // Determina il colore principale in base al primo tipo
+    const gradientColors = types.map(type => typeColors[type.type.name]);
+
+    stats.forEach(stat => {
+        const percentage = Math.min((stat.base_stat / 150) * 100, 100); // Percentuale basata su 150 come massimo
+        const statBar = `
+            <div class="pk-mon-stat-bar">
+                <span>${stat.stat.name.toUpperCase()}</span>
+                <div>
+                    <div style="width: ${percentage}%; background: linear-gradient(to right, ${gradientColors[0]}, ${gradientColors[1] || gradientColors[0]});"></div>
+                </div>
+                <span>${stat.base_stat}</span>
+            </div>
+        `;
+        statsContainer.innerHTML += statBar;
+    });
+
+    // Mostra il contenitore delle statistiche
+    statsContainer.style.display = 'block';
+}
 
 async function fetchData() {
     try {
-        // Calcolo dell'indice casuale
-        const l = pokelist.length;
-        const i = Math.floor(Math.random() * l);
-
-        // Ottenere il nome del Pokémon
-        const nomePokemon = pokelist[i].toLowerCase();
-
-        // Effettuare la richiesta API
+        const nomePokemon = pokelist[Math.floor(Math.random() * pokelist.length)].toLowerCase();
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${nomePokemon}`);
-        
-        if (!response.ok) {
-            throw new Error("Impossibile trovare il Pokémon");
-        }
+        if (!response.ok) throw new Error("Impossibile trovare il Pokémon");
 
         const data = await response.json();
-        const pkSprite = data.sprites.front_default;
+        const stats = data.stats;
+        const types = data.types; // Ottieni i tipi del Pokémon
 
-        // Aggiornare l'immagine del Pokémon
+        // Mostra l'immagine e il nome
         const imgElement = document.getElementById("pokeSprite");
-        imgElement.src = pkSprite;
+        imgElement.src = data.sprites.front_default;
         imgElement.style.display = "block";
 
-        // Mostrare il nome del Pokémon
         const output = document.getElementById("output");
         output.textContent = `Hai trovato: ${data.name}`;
-        output.style.color = "green";
+        output.style.color = "black";
+
+        // Salva il Pokémon attuale
+        window.currentPokemon = { name: data.name, sprite: data.sprites.front_default, stats, types };
+
+        // Mostra le statistiche
+        displayPokemonStats(stats, types);
+
+        // Abilita il pulsante "Catch"
+        document.querySelector(".catch-button").disabled = false;
     } catch (error) {
         console.error(error);
 
-        // Mostrare l'errore all'utente
+        // Mostra errore
         const output = document.getElementById("output");
         output.textContent = error.message;
         output.style.color = "red";
     }
+}
+
+function catchPokemon() {
+    if (!window.currentPokemon) {
+        alert("Cerca prima un Pokémon!");
+        return;
+    }
+
+    const caught = JSON.parse(localStorage.getItem('caughtPokemon')) || [];
+    caught.push(window.currentPokemon);
+    localStorage.setItem('caughtPokemon', JSON.stringify(caught));
+
+    alert(`${window.currentPokemon.name} è stato catturato!`);
+
+    // Nascondi il Pokémon e le statistiche
+    document.getElementById("pokeSprite").style.display = "none";
+    document.getElementById("output").textContent = '';
+    document.getElementById("pokemon-stats").style.display = "none";
+}
+function toggleDropdown() {
+    const listContainer = document.getElementById('caught-list');
+    const isHidden = listContainer.style.display === 'none' || listContainer.style.display === '';
+
+    if (isHidden) {
+        showCaughtList(); // Aggiornare la lista prima di mostrarla
+        listContainer.style.display = 'block';
+    } else {
+        listContainer.style.display = 'none';
+    }
+}
+
+function showCaughtList() {
+    // Recuperare la lista di Pokémon catturati
+    const caught = JSON.parse(localStorage.getItem('caughtPokemon')) || [];
+
+    // Recuperare il contenitore della lista
+    const listItems = document.getElementById('caught-list-items');
+
+    // Svuotare la lista precedente
+    listItems.innerHTML = '';
+
+    if (caught.length === 0) {
+        // Mostrare messaggio se la lista è vuota
+        listItems.innerHTML = '<li>Nessun Pokémon catturato.</li>';
+    } else {
+        // Popolare la lista con i Pokémon catturati
+        caught.forEach((pokemon) => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+                <img src="${pokemon.sprite}" alt="${pokemon.name}" 
+                     style="width: 40px; vertical-align: middle; margin-right: 10px;">
+                <span>${pokemon.name}</span>
+            `;
+            listItems.appendChild(listItem);
+        });
+    }
+}
+
+function clearCaughtList() {
+    // Conferma prima di cancellare la lista
+    
+
+    // Rimuove la lista da LocalStorage
+    localStorage.removeItem('caughtPokemon');
+
+    // Aggiorna la visualizzazione
+    const listItems = document.getElementById('caught-list-items');
+    listItems.innerHTML = '<li>Nessun Pokémon catturato.</li>';
+
+    // Nasconde la tendina se è aperta
+    document.getElementById('caught-list').style.display = 'none';
+
+    alert("La lista dei Pokémon catturati è stata pulita.");
+}
+
+function displayPokemonStats(stats, types) {
+    const statsContainer = document.getElementById('pokemon-stats');
+    statsContainer.innerHTML = ''; // Svuota le statistiche precedenti
+
+    // Determina i colori per il gradiente
+    const gradientColors = types.map(type => typeColors[type.type.name]);
+
+    stats.forEach(stat => {
+        const percentage = Math.min((stat.base_stat / 150) * 100, 100); // Percentuale basata su 150 come massimo
+        const statBar = `
+            <div class="pk-mon-stat-bar">
+                <span>${stat.stat.name.toUpperCase()}</span>
+                <div>
+                    <div style="width: ${percentage}%; background: linear-gradient(to right, ${gradientColors[0]}, ${gradientColors[1] || gradientColors[0]});"></div>
+                </div>
+                <span>${stat.base_stat}</span>
+            </div>
+        `;
+        statsContainer.innerHTML += statBar;
+    });
+
+    // Mostra il contenitore delle statistiche
+    statsContainer.style.display = 'block';
 }

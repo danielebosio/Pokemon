@@ -75,14 +75,11 @@ body {
     margin: 100px 0 30px 0; /* Spazio per non coprire il testo sotto la barra */
 }
 
-.search-bar {
-    width: 300px;
-    padding: 10px;
-    font-size: 1em;
-    border: 2px solid #ffde59;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    text-align: center;
+/* Contenitore per i pulsanti */
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Spazio tra i pulsanti */
 }
 
 /* Bottone di ricerca */
@@ -110,11 +107,111 @@ body {
     border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-top: 10px;
 }
 
+/* Hover sul pulsante "Catch" */
 .catch-button:hover {
     background-color: #45a049;
 }
 
+.dropdown {
+    position: absolute;
+    top: 60px; /* Posizionata sotto l'icona */
+    right: 20px;
+    background-color: rgb(8, 4, 4);
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    z-index: 1000;
+    display: none;
+}
 
+.dropdown h3 {
+    margin: 10px;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.dropdown ul {
+    list-style: none;
+    padding: 0 10px;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.dropdown li {
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown li:last-child {
+    border-bottom: none;
+}
+
+.dropdown img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.clear-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff3d3d;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 100px;
+    height: 50px;
+    font-size: 1.5em;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.clear-button:hover {
+    background-color: #e60000;
+    transform: scale(1.1);
+}
+
+.clear-button:active {
+    transform: scale(0.9);
+}
+.stats {
+    display: none;
+}
+
+.pk-mon-stat-bar {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.pk-mon-stat-bar span {
+    width: 120px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.pk-mon-stat-bar div {
+    flex: 1;
+    height: 12px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin: 0 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.pk-mon-stat-bar div div {
+    height: 100%;
+    border-radius: 5px;
+}
