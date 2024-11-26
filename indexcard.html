@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
+    <title>Pokemon Finder</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-title">
+                <img src="img/logo.png" alt="Pokemon logo">
+                <div class="title">Finder</div>
+            </div>
+            <div class="icons">
+                <img src="img/lista.png" alt="List" onclick="toggleDropdown()">
+                
+            </div>
+            
+            <!-- Tendina della lista -->
+            <div id="caught-list" class="dropdown" style="display: none;">
+                <h3>Pokémon catturati:</h3>
+                <ul id="caught-list-items"></ul>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="main-text">Genera un Pokémon casuale</div>
+
+        <!-- Contenitore dei pulsanti -->
+        <div class="buttons-container">
+            <!-- Pulsanti di ricerca e cattura -->
+            <a href="index.html">
+                <button class="back-button">X</button>
+             </a>
+            <button class="search-button" onclick="fetchData()">Genera</button>
+            <button class="catch-button" onclick="catchPokemon()">Catch</button>
+        </div>
+
+       <!-- Sprite del Pokémon e risultato -->
+<img src="" alt="Sprite del Pokémon" id="pokeSprite" style="display:none;">
+<div id="output"></div>
+
+<!-- Contenitore delle statistiche -->
+<div class="stats grid grid-cols-2 gap-2 mb-6">
+    <div class="p-2 text-center text-gray-900 bg-green-400 rounded-lg hover:shadow-2xl transition duration-300">HP: 0</div>
+    <div class="p-2 text-center text-gray-900 bg-yellow-400 rounded-lg hover:shadow-2xl transition duration-300">ATK: 0</div>
+    <div class="p-2 text-center text-gray-900 bg-orange-400 rounded-lg hover:shadow-2xl transition duration-300">DEF: 0</div>
+    <div class="p-2 text-center text-gray-900 bg-cyan-500 rounded-lg hover:shadow-2xl transition duration-300">SpA: 0</div>
+    <div class="p-2 text-center text-gray-900 bg-purple-400 rounded-lg hover:shadow-2xl transition duration-300">SpD: 0</div>
+    <div class="p-2 text-center text-gray-900 bg-pink-400 rounded-lg hover:shadow-2xl transition duration-300">SPD: 0</div>
+</div>
+    </div>
+
+ 
+
+   <!-- Sprite del Pokémon -->
+<img src="" alt="Sprite del Pokémon" id="pokeSprite" style="display:none;">
+
+<!-- Statistiche del Pokémon -->
+<div id="pokemon-stats" style="display: none; margin-top: 20px;"></div>
+
+
+
+    
+    <button id="clear-list-button" class="clear-button" onclick="clearCaughtList()">Pulisci Lista</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
