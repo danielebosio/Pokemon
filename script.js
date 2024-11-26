@@ -1084,7 +1084,7 @@ async function fetchData() {
         const stats = data.stats;
         const types = data.types; // Ottieni i tipi del Pokémon
 
-        // Mostra l'immagine e il nome
+        // Mostrare immagine e funzione del pokemon
         const imgElement = document.getElementById("pokeSprite");
         imgElement.src = data.sprites.front_default;
         imgElement.style.display = "block";
@@ -1093,23 +1093,25 @@ async function fetchData() {
         output.textContent = `Hai trovato: ${data.name}`;
         output.style.color = "black";
 
-        // Salva il Pokémon attuale
+        // Salvataggio del pokemon attuale
         window.currentPokemon = { name: data.name, sprite: data.sprites.front_default, stats, types };
 
-        // Mostra le statistiche
+        // Statistiche e tipo
         displayPokemonStats(stats, types);
 
-        // Abilita il pulsante "Catch"
+        // Pulsante di cattura
         document.querySelector(".catch-button").disabled = false;
     } catch (error) {
         console.error(error);
 
-        // Mostra errore
+        // Gestione errori
         const output = document.getElementById("output");
         output.textContent = error.message;
         output.style.color = "red";
     }
 }
+
+document.addEventListener("DOMContentLoaded", fetchData());
 
 function catchPokemon() {
     if (!window.currentPokemon) {
@@ -1123,7 +1125,7 @@ function catchPokemon() {
 
     alert(`${window.currentPokemon.name} è stato catturato!`);
 
-    // Nascondi il Pokémon e le statistiche
+    // Questo pezzo nasconde il pokemon appena mostrato
     document.getElementById("pokeSprite").style.display = "none";
     document.getElementById("output").textContent = '';
     document.getElementById("pokemon-stats").style.display = "none";
@@ -1133,7 +1135,7 @@ function toggleDropdown() {
     const isHidden = listContainer.style.display === 'none' || listContainer.style.display === '';
 
     if (isHidden) {
-        showCaughtList(); // Aggiornare la lista prima di mostrarla
+        showCaughtList(); // Righe per aggiornare la lista prima di mostrarla
         listContainer.style.display = 'block';
     } else {
         listContainer.style.display = 'none';
@@ -1168,8 +1170,6 @@ function showCaughtList() {
 }
 
 function clearCaughtList() {
-    // Conferma prima di cancellare la lista
-    
 
     // Rimuove la lista da LocalStorage
     localStorage.removeItem('caughtPokemon');
