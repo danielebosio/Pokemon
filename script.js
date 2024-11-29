@@ -1084,15 +1084,18 @@ async function fetchData() {
         const stats = data.stats;
         const types = data.types;
 
-        // Mostra il nome e lo sprite
-        const nameElement = document.getElementById("pokemon-name");
-        const imgElement = document.getElementById("pokeSprite");
-        const displayContainer = document.getElementById("pokemon-display");
+        // Mostra il contenitore generale
+        const pokemonContainer = document.getElementById("pokemon-container");
+        pokemonContainer.style.display = "block"; // Mostra il riquadro principale
 
-        nameElement.textContent = data.name; // Imposta il nome
-        imgElement.src = data.sprites.front_default; // Imposta lo sprite
+        // Mostra il nome del Pokémon
+        const nameElement = document.getElementById("pokemon-name");
+        nameElement.textContent = data.name.toUpperCase();
+
+        // Mostra lo sprite
+        const imgElement = document.getElementById("pokeSprite");
+        imgElement.src = data.sprites.front_default;
         imgElement.style.display = "block";
-        displayContainer.style.display = "block"; // Mostra il contenitore
 
         // Salva il Pokémon attuale
         window.currentPokemon = { name: data.name, sprite: data.sprites.front_default, stats, types };
@@ -1241,5 +1244,8 @@ function removePokemon(index) {
         console.error("Indice non valido:", index);
         alert("Errore nella rimozione del Pokémon.");
     }
+}
+function capitalizeFirstLetter(val) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }
 
