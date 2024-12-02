@@ -3,18 +3,15 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
 }
 
 body {
-    
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    
 }
 
 /* Contenitore principale a tutta pagina */
@@ -26,7 +23,7 @@ body {
     align-items: center;
     background-color: white;
     background-image: url('sfondo.jpg');
-    background-size:cover;
+    background-size: cover;
 }
 
 /* Barra superiore fissata in alto */
@@ -48,7 +45,7 @@ body {
 .logo-title {
     display: flex;
     align-items: center;
-    gap: 15px; /* Spazio tra il logo e il titolo */
+    gap: 15px;
     font-family: 'Pokemon Solid', sans-serif;
     color: white;
 }
@@ -77,7 +74,7 @@ body {
 .main-text {
     font-size: 8em;
     font-family: 'Pokemon Solid', sans-serif;
-    color: rgb(206, 83, 83);                                           
+    color: rgb(206, 83, 83);
     margin: 100px 0 30px 0; /* Spazio per non coprire il testo sotto la barra */
 }
 
@@ -85,7 +82,7 @@ body {
 .buttons-container {
     display: flex;
     justify-content: center;
-    gap: 20px; /* Spazio tra i pulsanti */
+    gap: 20px;
 }
 
 /* Bottone di ricerca */
@@ -113,17 +110,16 @@ body {
     border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s;
-    
 }
 
-/* Hover sul pulsante "Catch" */
 .catch-button:hover {
     background-color: #45a049;
 }
 
+/* Dropdown */
 .dropdown {
     position: absolute;
-    top: 60px; /* Posizionata sotto l'icona */
+    top: 60px;
     right: 20px;
     background-color: rgb(8, 4, 4);
     border: 1px solid #ccc;
@@ -166,6 +162,7 @@ body {
     border-radius: 5px;
 }
 
+/* Clear button */
 .clear-button {
     position: fixed;
     bottom: 20px;
@@ -190,6 +187,7 @@ body {
 .clear-button:active {
     transform: scale(0.9);
 }
+
 .stats {
     display: none;
 }
@@ -208,8 +206,9 @@ body {
 }
 
 .pk-mon-stat-bar div {
-    transition: width 0.3s ease; /* Animazione quando si aggiorna */
+    transition: width 0.3s ease;
 }
+
 .pokemon-stats {
     margin-top: 20px;
 }
@@ -219,6 +218,7 @@ body {
     font-size: 14px;
     color: #333;
 }
+
 button.remove-button {
     background-color: #ff3d3d;
     color: white;
@@ -229,17 +229,18 @@ button.remove-button {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
- 
+
 button.remove-button:hover {
     background-color: #e60000;
     transform: scale(1.1);
 }
- 
+
 button.remove-button:active {
     transform: scale(0.9);
 }
+
 #pokemon-container {
-    width: 500px; /* Larghezza del contenitore principale (almeno il doppio del riquadro dello sprite) */
+    width: 500px;
     margin: 20px auto;
     text-align: center;
     position: relative;
@@ -256,30 +257,30 @@ button.remove-button:active {
     font-size: 1.5em;
     font-weight: bold;
     color: black;
-    margin-bottom: 10px; /* Spazio tra il nome e il riquadro */
+    margin-bottom: 10px;
 }
 
 #pokeSpriteContainer {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 250px; /* Larghezza fissa del riquadro */
-    height: 250px; /* Altezza fissa del riquadro */
-    border: 3px solid #000; /* Bordo del riquadro */
-    border-radius: 10px; /* Angoli arrotondati */
-    background-color: #f2f2f2; /* Colore di sfondo del riquadro */
+    width: 250px;
+    height: 250px;
+    border: 3px solid #000;
+    border-radius: 10px;
+    background-color: #f2f2f2;
 }
 
 #pokeSprite {
     display: block;
-    max-width: 80%; /* Imposta la dimensione massima in percentuale */
-    max-height: 80%; /* Imposta la dimensione massima in percentuale */
+    max-width: 80%;
+    max-height: 80%;
 }
 
-.back-button{
-    position: absolute; /* Posizionamento assoluto rispetto al contenitore */
-    top: 10px; /* Distanza dalla parte superiore */
-    left: 10px; /* Distanza dalla parte sinistra */
+.back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
     background-color: #ff3d3d;
     color: white;
     border: none;
@@ -291,6 +292,54 @@ button.remove-button:active {
 }
 
 .back-button:hover {
-    background-color: #e63636; /* Cambia colore al passaggio del mouse */
-    transform: scale(1.1); /* Leggera animazione al passaggio del mouse */
+    background-color: #e63636;
+    transform: scale(1.1);
 }
+
+@media (max-width: 768px) {
+    /* Modifiche per schermi di larghezza inferiore a 768px */
+    
+    .logo-title .title {
+        font-size: 1.2em; /* Riduci la dimensione del titolo */
+    }
+
+    .main-text {
+        font-size: 5em; /* Riduci la dimensione del testo principale */
+    }
+
+    .buttons-container {
+        flex-direction: column; /* I pulsanti si disporranno in colonna */
+        gap: 10px;
+    }
+
+    #pokemon-container {
+        width: 90%; /* Riduci la larghezza del contenitore */
+    }
+
+    #pokeSpriteContainer {
+        width: 200px; /* Riduci la larghezza del contenitore dello sprite */
+        height: 200px; /* Riduci l'altezza del contenitore dello sprite */
+    }
+
+    .search-button, .catch-button {
+        font-size: 1em; /* Riduci la dimensione del font dei pulsanti */
+        padding: 10px 20px; /* Riduci la dimensione dei pulsanti */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Modifiche per schermi molto piccoli (smartphone) */
+    
+    .logo-title .title {
+        font-size: 1.1em; /* Ulteriore riduzione del titolo */
+    }
+
+    .main-text {
+        font-size: 3em; /* Ulteriore riduzione del testo principale */
+    }
+
+    .search-button, .catch-button {
+        font-size: 0.9em;
+        padding: 8px 15px;
+    }
+
