@@ -1078,7 +1078,7 @@ async function fetchData() {
     try {
         const nomePokemon = pokelist[Math.floor(Math.random() * pokelist.length)].toLowerCase();
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${nomePokemon}`);
-        if (!response.ok) throw new Error("Impossibile trovare il Pokémon");
+        if (!response.ok) alert (Error);
 
         const data = await response.json();
         const stats = data.stats;
@@ -1248,4 +1248,3 @@ function removePokemon(index) {
 function capitalizeFirstLetter(val) {
     return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }
-

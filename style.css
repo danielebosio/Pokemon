@@ -22,7 +22,7 @@ body {
     flex-direction: column;
     align-items: center;
     background-color: white;
-    background-image: url('sfondo.jpg');
+    background-image: url('img/Palazzo.jpg');
     background-size: cover;
 }
 
@@ -48,15 +48,21 @@ body {
     gap: 15px;
     font-family: 'Pokemon Solid', sans-serif;
     color: white;
+   
+    text-shadow: 
+        -2px -2px 0 #000000, /* Contorno bianco in alto a sinistra */
+         2px -2px 0 #000000, /* Contorno bianco in alto a destra */
+        -2px  2px 0 #000000, /* Contorno bianco in basso a sinistra */
+         2px  2px 0 #000000; /* Contorno bianco in basso a destra */
 }
 
 .logo-title img {
-    height: 30px;
+    height: 50px;
 }
 
 .logo-title .title {
     font-size: 1.5em;
-    font-weight: bold;
+    
 }
 
 /* Icone della barra */
@@ -66,8 +72,8 @@ body {
 }
 
 .header .icons img {
-    width: 24px;
-    height: 24px;
+    width: 40px;
+    height: 40px;
 }
 
 /* Testo principale centrato */
@@ -76,6 +82,11 @@ body {
     font-family: 'Pokemon Solid', sans-serif;
     color: rgb(206, 83, 83);
     margin: 100px 0 30px 0; /* Spazio per non coprire il testo sotto la barra */
+    text-shadow: 
+        -2px -2px 0 #fff, /* Contorno bianco in alto a sinistra */
+         2px -2px 0 #fff, /* Contorno bianco in alto a destra */
+        -2px  2px 0 #fff, /* Contorno bianco in basso a sinistra */
+         2px  2px 0 #fff; /* Contorno bianco in basso a destra */
 }
 
 /* Contenitore per i pulsanti */
@@ -342,4 +353,4 @@ button.remove-button:active {
         font-size: 0.9em;
         padding: 8px 15px;
     }
-
+}
